@@ -1,12 +1,12 @@
 <?php
 
-class ContentType {
+class PostType {
 
   public function __construct() {
 
   }
 
-  public function addContentType( $args ) {
+  public function addPostType( $args ) {
     $settings = $args['settings'];
     $key = $args['key'];
     $name = $args['name'];
