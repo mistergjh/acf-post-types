@@ -217,7 +217,7 @@ acf_add_local_field_group(array (
 			array (
 				'param' => 'post_type',
 				'operator' => '==',
-				'value' => 'acf_content_type',
+				'value' => 'acf_post_type',
 			),
 		),
 	),

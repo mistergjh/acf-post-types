@@ -11,8 +11,13 @@ new ACF_Post_Types;
 class ACF_Post_Types {
 
   public function __construct() {
+    add_action('init', array( $this, 'includeAcfFields' ));
     add_action('init', array( $this, 'addAcfPostType' ));
     add_action('init', array( $this, 'addRegisteredPostTypes' ));
+  }
+
+  public function includeAcfFields() {
+    require('assets/acf/fields.php');
   }
 
   public function addAcfPostType() {

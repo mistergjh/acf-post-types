@@ -10,9 +10,11 @@ class PostType {
     $settings = $args['settings'];
     $key = $args['key'];
     $name = $args['name'];
+    
     if ( post_type_exists( $key ) ) {
       return;
     }
+
     $args = array(
       'label' => $name,
       'description' => $settings['description'],
@@ -27,7 +29,7 @@ class PostType {
       'show_in_menu' => true,
       'show_in_admin_bar' => true,
       'menu_position' => 80,
-      'menu_icon' => 'dashicons-video-alt',
+      'menu_icon' => 'dashicons-admin-tools',
       // 'capability_type' => 'post',
       // 'capabilities' => array(),
       // 'map_meta_cap' => false,
