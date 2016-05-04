@@ -10,7 +10,7 @@ class PostType {
     $settings = $args['settings'];
     $key = $args['key'];
     $name = $args['name'];
-    
+
     if ( post_type_exists( $key ) ) {
       return;
     }
@@ -18,9 +18,6 @@ class PostType {
     $args = array(
       'label' => $name,
       'description' => $settings['description'],
-      'labels' => array(
-
-      ),
       'public' => true,
       'publicly_queryable' => true,
       'exclude_from_search' => false,
@@ -47,7 +44,31 @@ class PostType {
       'rest_controller_class' => '',
     );
 
+    $this->addLabels( $args, $settings );
     register_post_type( $key, $args );
+  }
+
+  public function addLabels( &$args, $settings ) {
+    $labels = array();
+    if( $settings['lbl_name'] ) {
+      $labels['name'] = $settings['lbl_name'];
+    }
+    if( $settings['lbl_name'] ) {
+      $labels['singular_name'] = $settings['lbl_singular_name'];
+    }
+    if( $settings['lbl_add_new'] ) {
+      $labels['add_new'] = $settings['lbl_add_new'];
+    }
+    if( $settings['lbl_add_new_item'] ) {
+      $labels['add_new_item'] = $settings['lbl_add_new_item'];
+    }
+    if( $settings['lbl_edit_item'] ) {
+      $labels['edit_item'] = $settings['lbl_edit_item'];
+    }
+    if( $settings['lbl_new_item'] ) {
+      $labels['new_item'] = $settings['lbl_new_item'];
+    }
+    $args['labels'] = $labels;
   }
 
 }
