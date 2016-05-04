@@ -3,6 +3,7 @@
 /*
 Plugin Name: ACF Post Types
 Description: Registers post types using an ACF interface
+Version: 0.9.1
 */
 
 require('src/PostType.php');
