@@ -22,7 +22,7 @@ class ACF_Post_Types {
   }
 
   public function addAcfPostType() {
-    $ct = new PostType;
+    $ct = new ACFPT_PostType;
     $args = array(
       'key' => 'acf_post_type',
       'name' => 'Post Type',
@@ -38,7 +38,7 @@ class ACF_Post_Types {
   }
 
   public function registerPostType( $ctPost ) {
-    $ct = new PostType;
+    $ct = new ACFPT_PostType;
     $fields = get_fields( $ctPost->ID );
 
     $args = array(

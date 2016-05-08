@@ -1,6 +1,6 @@
 <?php
 
-class PostType {
+class ACFPT_PostType {
 
   public function __construct() {
 
