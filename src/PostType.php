@@ -16,7 +16,7 @@ class ACFPT_PostType {
     }
 
     $args = array(
-      'label' => $name,
+      'label' => $name . 's',
       'description' => $settings['description'],
       'public' => true,
       'publicly_queryable' => true,
