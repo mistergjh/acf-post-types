@@ -12,7 +12,7 @@ new ACF_Post_Types;
 class ACF_Post_Types {
 
   public function __construct() {
-    add_action('init', array( $this, 'includeAcfFields' ));
+    // add_action('init', array( $this, 'includeAcfFields' ));
     add_action('init', array( $this, 'addAcfPostType' ));
     add_action('init', array( $this, 'addRegisteredPostTypes' ));
   }
@@ -40,6 +40,8 @@ class ACF_Post_Types {
   public function registerPostType( $ctPost ) {
     $ct = new ACFPT_PostType;
     $fields = get_fields( $ctPost->ID );
+
+    // var_dump( $fields );
 
     $args = array(
       'key' => $fields['key'],
