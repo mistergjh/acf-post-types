@@ -50,11 +50,24 @@ class ACFPT_PostType {
     $this->name = $args['name'];
 
     // set main display label
-    $this->args['label'] = $this->name;
+    $this->args['label'] = $this->name . 's';
 
     $this->setLabels();
-    //$this->setBooleanOptions();
+    // $this->setBooleanOptions();
+    $this->setMenuOptions();
+
+    // var_dump( $this->args );
+
     register_post_type( $this->key, $this->args );
+  }
+
+  public function setMenuOptions() {
+    if( $this->settings['menu_position'] ) {
+      $this->args['menu_position'] = (int) $this->settings['menu_position'];
+    }
+    if( $this->settings['menu_icon'] ) {
+      $this->args['menu_icon'] = $this->settings['menu_icon'];
+    }
   }
 
   public function setBooleanOptions() {

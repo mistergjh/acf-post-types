@@ -15,6 +15,21 @@ class ACF_Post_Types {
     // add_action('init', array( $this, 'includeAcfFields' ));
     add_action('init', array( $this, 'addAcfPostType' ));
     add_action('init', array( $this, 'addRegisteredPostTypes' ));
+    add_action('acf/save_post', array( $this, 'afterSavePostType' ), 20);
+  }
+
+  // flush rewrite rules for new CPT
+  public function afterSavePostType( $postID ) {
+    if( empty($_POST['acf'])) {
+      return;
+    }
+
+    $postTypeKey = get_field('key');
+    if ( post_type_exists( $postTypeKey ) ) {
+      return;
+    }
+
+    flush_rewrite_rules();
   }
 
   public function includeAcfFields() {
@@ -67,3 +82,30 @@ class ACF_Post_Types {
 
 
 }
+
+
+
+
+/*
+
+TO DO
+
+add remaining label options
+
+process description during CPT register
+
+set capabilities and test using them, they didn't work before
+process list of capabilities in textarea
+
+process permalink_epmask
+
+process register meta callback
+
+process taxonies textarea and use options in CPT
+
+process supports list of checkboxes
+
+add REST settings during register CPT
+test using REST options
+
+*/
