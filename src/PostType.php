@@ -19,9 +19,6 @@ class ACFPT_PostType {
       'show_in_admin_bar' => true,
       'menu_position' => 80,
       'menu_icon' => 'dashicons-admin-tools',
-      // 'capability_type' => 'post',
-      // 'capabilities' => array(),
-      // 'map_meta_cap' => false,
       'hierarchical' => false,
       'supports' => array('title', 'editor'),
       'register_meta_box_cb' => '',
@@ -53,12 +50,75 @@ class ACFPT_PostType {
     $this->args['label'] = $this->name . 's';
 
     $this->setLabels();
-    // $this->setBooleanOptions();
+    $this->setBooleanOptions();
     $this->setMenuOptions();
+    $this->setAdvancedOptions();
+    $this->setTaxonomies();
+    $this->setSupports();
+    $this->setRestOptions();
+    $this->setRewriteOptions();
 
     // var_dump( $this->args );
 
     register_post_type( $this->key, $this->args );
+  }
+
+  public function setRewriteOptions() {
+
+    if( !$this->settings['rewrite'] ) {
+      $this->args['rewrite'] = false;
+      return;
+    }
+
+    $rewrite = array(
+      'slug' => $this->settings['slug'],
+      'with_front' => $this->settings['with_front'],
+      'feeds' => $this->settings['feeds'],
+      'pages' => $this->settings['pages'],
+      'ep_mask' => $this->settings['ep_mask'],
+    );
+
+    $this->args['rewrite'] = $rewrite;
+  }
+
+  public function setTaxonomies() {
+    if( $this->settings['taxonomies'] ) {
+      $this->args['taxonomies'] = $this->parseTextareaToArray( $this->settings['taxonomies'] );
+    }
+  }
+
+  public function setRestOptions() {
+    $this->setBooleanOption( 'show_in_rest' );
+
+    if( $this->settings['rest_base'] ) {
+      $this->args['rest_base'] = $this->settings['rest_base'];
+    }
+
+    if( $this->settings['rest_controller_class'] ) {
+      $this->args['rest_base'] = $this->settings['rest_controller_class'];
+    }
+  }
+
+  public function setSupports() {
+    if( $this->settings['supports'] ) {
+      $this->args['supports'] = $this->settings['supports'];
+    }
+  }
+
+  public function parseTextareaToArray( $textareaContent ) {
+    $a = array();
+    $textareaContent = str_replace( ' ', '', $textareaContent );
+    $a = explode( ',', $textareaContent );
+    return $a;
+  }
+
+  public function setAdvancedOptions() {
+    if( $this->settings['permalink_epmask'] ) {
+      $this->args['permalink_epmask'] = $this->settings['permalink_epmask'];
+    }
+    if( $this->settings['register_meta_box_cb'] ) {
+      $this->args['register_meta_box_cb'] = $this->settings['register_meta_box_cb'];
+    }
   }
 
   public function setMenuOptions() {
@@ -80,13 +140,15 @@ class ACFPT_PostType {
     $this->setBooleanOption( 'show_in_admin_bar' );
     $this->setBooleanOption( 'hierarchical' );
     $this->setBooleanOption( 'has_archive' );
-    $this->setBooleanOption( 'rewrite' );
     $this->setBooleanOption( 'query_var' );
     $this->setBooleanOption( 'can_export' );
     $this->setBooleanOption( 'show_in_rest' );
   }
 
   public function setBooleanOption( $option ) {
+    if( empty( $this->settings[ $option ] )) {
+      return;
+    }
     if( $this->settings[ $option ] ) {
       $this->args[ $option ] = true;
     } else {
@@ -114,6 +176,18 @@ class ACFPT_PostType {
     if( $this->settings['lbl_new_item'] ) {
       $labels['new_item'] = $this->settings['lbl_new_item'];
     }
+
+    $labelKeys = array(
+      'view_item', 'search_items', 'not_found', 'not_found_in_trash', 'parent_item_colon', 'all_items', 'archives', 'insert_into_item', 'uploaded_to_this_item', 'featured_image', 'set_featured_image', 'remove_featured_image', 'use_featured_image', 'menu_name', 'filter_items_list', 'items_list_navigation', 'items_list', 'name_admin_bar'
+    );
+
+    // set each label if available
+    foreach( $labelKeys as $l ) {
+      if( $this->settings['lbl_' .$l] ) {
+        $labels[ $l ] = $this->settings['lbl_' .$l];
+      }
+    }
+
     $this->args['labels'] = $labels;
   }
 

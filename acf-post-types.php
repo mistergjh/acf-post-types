@@ -3,7 +3,7 @@
 /*
 Plugin Name: ACF Post Types
 Description: Registers post types using an ACF interface
-Version: 0.9.2
+Version: 1.0.0
 */
 
 require('src/PostType.php');
@@ -12,7 +12,7 @@ new ACF_Post_Types;
 class ACF_Post_Types {
 
   public function __construct() {
-    // add_action('init', array( $this, 'includeAcfFields' ));
+    add_action('init', array( $this, 'includeAcfFields' ));
     add_action('init', array( $this, 'addAcfPostType' ));
     add_action('init', array( $this, 'addRegisteredPostTypes' ));
     add_action('acf/save_post', array( $this, 'afterSavePostType' ), 20);
@@ -24,10 +24,16 @@ class ACF_Post_Types {
       return;
     }
 
+    /*
+
+    Turned off this check because if the rewrite rules change we need a flush, and so we have to compare to see if any changes to those fields
+
     $postTypeKey = get_field('key');
     if ( post_type_exists( $postTypeKey ) ) {
       return;
     }
+
+    */
 
     flush_rewrite_rules();
   }
@@ -90,22 +96,9 @@ class ACF_Post_Types {
 
 TO DO
 
-add remaining label options
+v2
 
-process description during CPT register
-
-set capabilities and test using them, they didn't work before
-process list of capabilities in textarea
-
-process permalink_epmask
-
-process register meta callback
-
-process taxonies textarea and use options in CPT
-
-process supports list of checkboxes
-
-add REST settings during register CPT
-test using REST options
+Only run rewrite flush if those options change, requires a function to compare current rewrite rules to new rewrite rules
+Add capabilities settings (needs research into setting options)
 
 */
