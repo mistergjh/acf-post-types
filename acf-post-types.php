@@ -23,18 +23,6 @@ class ACF_Post_Types {
     if( empty($_POST['acf'])) {
       return;
     }
-
-    /*
-
-    Turned off this check because if the rewrite rules change we need a flush, and so we have to compare to see if any changes to those fields
-
-    $postTypeKey = get_field('key');
-    if ( post_type_exists( $postTypeKey ) ) {
-      return;
-    }
-
-    */
-
     flush_rewrite_rules();
   }
 
