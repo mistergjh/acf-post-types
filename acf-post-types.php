@@ -1,9 +1,14 @@
 <?php
 
 /*
-Plugin Name: ACF Post Types
-Description: Registers post types using an ACF interface
-Version: 1.0.0
+  Plugin Name: ACF Post Types
+  Plugin URI: http://goldhat.ca/plugins/acf-post-types/
+  Description: Registers post types using an ACF interface
+  Version: 1.1.0
+  Author: Joel Milne, GoldHat Group
+  Author URI: http://goldhat.ca
+  Text Domain: acf-post-types
+  License: GPLv2 or later
 */
 
 require('src/PostType.php');
