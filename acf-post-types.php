@@ -49,13 +49,11 @@ class ACF_Post_Types {
   public function registerPostType( $ctPost ) {
     $ct = new ACFPT_PostType;
     $fields = get_fields( $ctPost->ID );
-
     $args = array(
       'key' => $fields['key'],
       'name' => $ctPost->post_title,
       'settings' => $fields,
     );
-
     $ct->addPostType( $args );
   }
 
