@@ -75,19 +75,4 @@ class ACF_Post_Types {
     return false;
   }
 
-
 }
-
-
-
-
-/*
-
-TO DO
-
-v2
-
-Only run rewrite flush if those options change, requires a function to compare current rewrite rules to new rewrite rules
-Add capabilities settings (needs research into setting options)
-
-*/

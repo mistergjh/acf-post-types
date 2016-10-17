@@ -20,8 +20,6 @@ Provides ACF (Advanced Custom Fields) admin interface for creating custom post t
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Visit "ACF Post Types" tab in the WP Admin to add a new custom post type.
 
-== Changelog ==
-
 = 1.1.0 =
 
 Fixed label issue. Add support REST api options.
