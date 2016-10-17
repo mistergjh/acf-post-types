@@ -59,7 +59,7 @@ class ACF_Post_Types {
       'name' => $ctPost->post_title,
       'settings' => $fields,
     );
-    $ct->addPostType( $args );
+    $ct->add( $args );
   }
 
   public function getPostTypes() {
