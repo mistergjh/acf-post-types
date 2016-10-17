@@ -55,6 +55,9 @@ class ACFPT_PostType {
     // set main display label
     $this->args['label'] = $this->name . 's';
 
+    // set args name
+    $this->args['name'] = $this->name;
+
     $this->setLabels();
     $this->setBooleanOptions();
     $this->setMenuOptions();
@@ -152,7 +155,7 @@ class ACFPT_PostType {
 
     // set each label if available
     foreach( $labelKeys as $l ) {
-      if( array_key_exists('lbl_' .$l, $this->settings) && isset( $this->settings['lbl_' .$l] )) {
+      if( array_key_exists('lbl_' .$l, $this->settings) && !empty( $this->settings['lbl_' .$l] )) {
         $labels[ $l ] = $this->settings['lbl_' .$l];
       }
     }
