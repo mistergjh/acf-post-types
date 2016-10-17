@@ -40,7 +40,7 @@ class ACFPT_PostType {
     }
   }
 
-  public function addPostType( $args ) {
+  public function add( $args ) {
     if ( post_type_exists( $args['key'] ) ) {
       return;
     }
@@ -51,9 +51,6 @@ class ACFPT_PostType {
     }
     $this->key = $args['key'];
     $this->name = $args['name'];
-
-    // set args name
-    $this->args['name'] = $this->name;
 
     // set main display label
     $this->args['label'] = $this->name . 's';
@@ -67,9 +64,7 @@ class ACFPT_PostType {
     $this->setRestOptions();
     $this->setRewriteOptions();
 
-    // debug args
-    // var_dump($this->args);
-
+    // debug args  var_dump( $this->args );
     register_post_type( $this->key, $this->args, 50 );
   }
 
@@ -152,12 +147,12 @@ class ACFPT_PostType {
   public function setLabels() {
     $labels = array();
     $labelKeys = array(
-      'lbl_name', 'lbl_singular_name', 'lbl_add_new', 'lbl_add_new_item', 'lbl_edit_item', 'lbl_new_item', '', 'view_item', 'search_items', 'not_found', 'not_found_in_trash', 'parent_item_colon', 'all_items', 'archives', 'insert_into_item', 'uploaded_to_this_item', 'featured_image', 'set_featured_image', 'remove_featured_image', 'use_featured_image', 'menu_name', 'filter_items_list', 'items_list_navigation', 'items_list', 'name_admin_bar'
+      'name', 'singular_name', 'add_new', 'add_new_item', 'edit_item', 'new_item', 'view_item', 'search_items', 'not_found', 'not_found_in_trash', 'parent_item_colon', 'all_items', 'archives', 'insert_into_item', 'uploaded_to_this_item', 'featured_image', 'set_featured_image', 'remove_featured_image', 'use_featured_image', 'menu_name', 'filter_items_list', 'items_list_navigation', 'items_list', 'name_admin_bar'
     );
 
     // set each label if available
     foreach( $labelKeys as $l ) {
-      if( array_key_exists('lbl_' .$l, $this->settings) && !empty( $this->settings['lbl_' .$l] )) {
+      if( array_key_exists('lbl_' .$l, $this->settings) && isset( $this->settings['lbl_' .$l] )) {
         $labels[ $l ] = $this->settings['lbl_' .$l];
       }
     }
