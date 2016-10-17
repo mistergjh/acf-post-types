@@ -41,7 +41,7 @@ class ACF_Post_Types {
       'key' => 'acf_post_type',
       'name' => 'Post Type',
     );
-    $ct->addPostType( $args );
+    $ct->add( $args );
   }
 
   public function addRegisteredPostTypes() {
